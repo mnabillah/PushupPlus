@@ -16,6 +16,11 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
     TextView textViewProximityReadings;
     TextView textViewCounter;
 
+    double prevValue;
+    double currValue;
+
+    int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,8 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
         textViewCounter = findViewById(R.id.text_view_counter);
         textViewCounter.setText("Jumlah push-up: 0");
 
+        prevValue = sensorProximity.getMaximumRange();
+        currValue = 0;
 
         if (sensorProximity != null) {
             // ada sensor accelerometer
@@ -59,6 +66,13 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public void onSensorChanged(SensorEvent event) {
         double distance = event.values[0];
+        currValue = distance;
+        if (currValue == sensorProximity.getMaximumRange() && prevValue == 0) {
+            count++;
+            String newValue = "Jumlah push-up: " + count;
+            textViewCounter.setText(newValue);
+        }
+        prevValue = currValue;
         textViewProximityReadings.setText(String.valueOf(distance));
     }
 
