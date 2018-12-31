@@ -1,4 +1,4 @@
-package com.resonatestudios.push_upcounter;
+package com.resonatestudios.pushup_plus;
 
 import org.junit.Test;
 
