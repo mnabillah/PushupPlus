@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                    .setCustomAnimations(R.anim.vertical_fade_in, R.anim.vertical_fade_out)
                     .replace(R.id.frame_layout, fragment)
                     .commit();
             return true;
