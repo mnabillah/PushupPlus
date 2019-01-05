@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.resonatestudios.pushupplus.activity.MainActivity">
+        <activity
+            android:name="com.resonatestudios.pushupplus.activity.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,7 @@
         </activity>
         <activity
             android:name="com.resonatestudios.pushupplus.activity.CounterActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/counter" />
     </application>
 
 </manifest>

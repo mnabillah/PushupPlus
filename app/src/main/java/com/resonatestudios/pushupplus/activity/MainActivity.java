@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
-
     private ActionBar actionBar;
+    private static final int REQUEST_CODE = 99;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
