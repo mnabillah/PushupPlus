@@ -1,4 +1,4 @@
-package com.resonatestudios.pushup_plus;
+package com.resonatestudios.pushupplus;
 
 import org.junit.Test;
 

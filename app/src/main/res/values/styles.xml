@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Widget.PushupPlus.Button.UnelevatedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Widget.PushupPlus.Button.UnelevatedButton.Positive">
+        <item name="backgroundTint">@color/colorButtonPositive</item>
+    </style>
+
+    <style name="Widget.PushupPlus.Button.UnelevatedButton.Negative">
+        <item name="backgroundTint">@color/colorButtonNegative</item>
+    </style>
+
 </resources>

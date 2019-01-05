@@ -1,4 +1,4 @@
-package com.resonatestudios.pushup_plus.fragment;
+package com.resonatestudios.pushupplus.fragment;
 
 
 import android.content.Context;
@@ -11,25 +11,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import com.resonatestudios.pushup_plus.R;
-import com.resonatestudios.pushup_plus.activity.CounterActivity;
+import com.resonatestudios.pushupplus.R;
+import com.resonatestudios.pushupplus.activity.CounterActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private Context context;
-    Button buttonStart;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        buttonStart = view.findViewById(R.id.button_start);
+        Button buttonStart = view.findViewById(R.id.button_start);
         buttonStart.setOnClickListener(this);
+
+        TextView textViewDate = view.findViewById(R.id.date_today);
+        textViewDate.setText(getTodayDate());
 
         return view;
     }
@@ -49,5 +57,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    private String getTodayDate() {
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM d", Locale.getDefault());
+        return simpleDateFormat.format(today);
     }
 }

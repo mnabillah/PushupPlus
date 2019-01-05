@@ -1,4 +1,4 @@
-package com.resonatestudios.pushup_plus.fragment;
+package com.resonatestudios.pushupplus.fragment;
 
 
 import android.os.Bundle;
@@ -7,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.resonatestudios.pushup_plus.R;
+import com.resonatestudios.pushupplus.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
+public class LeaderboardFragment extends Fragment {
 
 
-    public HistoryFragment() {
+    public LeaderboardFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        return inflater.inflate(R.layout.fragment_leaderboard, container, false);
     }
 
 }

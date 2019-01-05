@@ -1,4 +1,4 @@
-package com.resonatestudios.pushup_plus;
+package com.resonatestudios.pushupplus;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

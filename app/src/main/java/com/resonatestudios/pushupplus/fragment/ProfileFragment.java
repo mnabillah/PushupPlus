@@ -1,4 +1,4 @@
-package com.resonatestudios.pushup_plus.fragment;
+package com.resonatestudios.pushupplus.fragment;
 
 
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.resonatestudios.pushup_plus.R;
+import com.resonatestudios.pushupplus.R;
 
 /**
  * A simple {@link Fragment} subclass.
