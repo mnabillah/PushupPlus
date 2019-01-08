@@ -1,5 +1,6 @@
 package com.resonatestudios.pushupplus.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,15 @@ import android.widget.TextView;
 import com.resonatestudios.pushupplus.R;
 import com.resonatestudios.pushupplus.model.HistoryItem;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.Row> {
-    ArrayList<HistoryItem> historyItems;
-    Context context;
+    private ArrayList<HistoryItem> historyItems;
+    private Context context;
 
     public HistoryListAdapter(Context context) {
         this.context = context;
@@ -42,14 +44,20 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         return new Row(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull Row holder, int position) {
         HistoryItem historyItem = historyItems.get(position);
 
         holder.textViewNumber.setText(String.valueOf(position + 1));
         holder.textViewAmount.setText(String.valueOf(historyItem.getAmount()));
-        holder.textViewDuration.setText(String.valueOf(historyItem.getDuration()));
-        holder.textViewDate.setText(String.valueOf(historyItem.getDate()));
+        long totalMilliseconds = historyItem.getDuration();
+        int seconds = (int) (totalMilliseconds / 1000);
+        int minutes = seconds / 60;
+        seconds = seconds % 60;
+        int milliSeconds = (int) (totalMilliseconds % 1000);
+        holder.textViewDuration.setText(String.format("%02d:%02d:%03d", minutes, seconds, milliSeconds));
+        holder.textViewDate.setText(DateFormat.getDateInstance().format(historyItem.getDate()));
     }
 
     @Override

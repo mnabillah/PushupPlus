@@ -9,6 +9,7 @@ import com.resonatestudios.pushupplus.R;
 import com.resonatestudios.pushupplus.fragment.HistoryFragment;
 import com.resonatestudios.pushupplus.fragment.HomeFragment;
 import com.resonatestudios.pushupplus.fragment.LeaderboardFragment;
+import com.resonatestudios.pushupplus.fragment.NewsFragment;
 import com.resonatestudios.pushupplus.fragment.ProfileFragment;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
     private ActionBar actionBar;
-    private static final int REQUEST_CODE = 99;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_history:
                             actionBar.setTitle(R.string.title_history);
                             return loadFragment(new HistoryFragment());
-                        case R.id.navigation_leaderboard:
-                            actionBar.setTitle(R.string.title_leaderboard);
-                            return loadFragment(new LeaderboardFragment());
+//                        case R.id.navigation_leaderboard:
+//                            actionBar.setTitle(R.string.title_leaderboard);
+//                            return loadFragment(new LeaderboardFragment());
+                        case R.id.navigation_news:
+                            actionBar.setTitle("News");
+                            return loadFragment(new NewsFragment());
                         case R.id.navigation_profile:
                             actionBar.setTitle(R.string.title_profile);
                             return loadFragment(new ProfileFragment());
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setElevation(0);
 
         loadFragment(new HomeFragment());
         BottomNavigationView navigation = findViewById(R.id.navigation);

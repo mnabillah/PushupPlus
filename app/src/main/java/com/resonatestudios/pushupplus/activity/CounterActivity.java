@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.resonatestudios.pushupplus.R;
+import com.resonatestudios.pushupplus.controller.DbHistory;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CounterActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
-    public static final int RESULT_CODE = 100;
+    public static final String TAG = "CounterActivity";
     //<editor-fold desc="Sensor Components and Variables">
     private SensorManager sensorManager;
     private Sensor sensorProximity;
@@ -88,16 +90,14 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
         currValue = 0;
         prevValue = sensorProximity.getMaximumRange();
 
-        if (sensorProximity != null) {
-            // ada sensor accelerometer
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setMessage("Press start to begin\nPress stop to end and return to Home");
-            alertDialog.show();
-        } else {
+        if (sensorProximity == null) {
             // tidak ada sensor accelerometer
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setMessage("Proximity sensor not found\nUnfortunately, this means you cannot use this app");
+            alertDialog.setMessage("Proximity sensor not found\n" +
+                    "Unfortunately, this means you cannot use this app");
             alertDialog.show();
+            // tak boleh klik start
+            buttonStart.setEnabled(false);
         }
 
     }
@@ -122,8 +122,6 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_start:
-                // start sensor
-                sensorManager.registerListener(this, sensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
                 // set UI
                 buttonStart.setEnabled(false);
                 textViewCountdown.setVisibility(TextView.VISIBLE);
@@ -138,6 +136,8 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
                     @Override
                     public void onFinish() {
                         textViewCountdown.setText("GO!");
+                        // start sensor
+                        sensorManager.registerListener(CounterActivity.this, sensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
                         // start timer
                         StartTime = SystemClock.uptimeMillis();
                         handler.postDelayed(runnableTimer, 0);
@@ -175,11 +175,20 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
                 // stop timer
                 TimeBuff += MillisecondTime;
                 handler.removeCallbacks(runnableTimer);
-                // TODO: insert final value to SQLite
+                // get values to be inserted to DB
                 int amount = count;
                 long duration = TimeBuff;
                 Date date = Calendar.getInstance().getTime();
-                // TODO: stop activity
+                DbHistory dbHistory = new DbHistory(this);
+                dbHistory.open();
+                if (dbHistory.insert(amount, duration, date)){
+                    Log.i(TAG, "History insert success");
+                } else {
+                    Log.e(TAG, "History insert failed");
+                }
+                dbHistory.close();
+                // stop activity
+                finish();
                 break;
         }
     }

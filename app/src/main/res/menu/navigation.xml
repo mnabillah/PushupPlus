@@ -11,10 +11,15 @@
         android:icon="@drawable/ic_history_black_24dp"
         android:title="@string/title_history" />
 
+    <!--<item-->
+        <!--android:id="@+id/navigation_leaderboard"-->
+        <!--android:icon="@drawable/ic_podium"-->
+        <!--android:title="@string/title_leaderboard" />-->
+
     <item
-        android:id="@+id/navigation_leaderboard"
-        android:icon="@drawable/ic_podium"
-        android:title="@string/title_leaderboard" />
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/ic_newspaper"
+        android:title="@string/news" />
 
     <item
         android:id="@+id/navigation_profile"

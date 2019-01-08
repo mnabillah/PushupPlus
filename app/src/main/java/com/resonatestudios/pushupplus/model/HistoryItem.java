@@ -5,10 +5,10 @@ import java.util.Date;
 public class HistoryItem {
     private int id;
     private int amount;
-    private int duration;
+    private long duration;
     private Date date;
 
-    public HistoryItem(int id, int amount, int duration, Date date) {
+    public HistoryItem(int id, int amount, long duration, Date date) {
         this.id = id;
         this.amount = amount;
         this.duration = duration;
@@ -23,7 +23,7 @@ public class HistoryItem {
         return amount;
     }
 
-    public int getDuration() {
+    public long getDuration() {
         return duration;
     }
 
