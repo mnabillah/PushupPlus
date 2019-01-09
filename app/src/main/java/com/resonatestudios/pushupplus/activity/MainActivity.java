@@ -2,13 +2,11 @@ package com.resonatestudios.pushupplus.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.resonatestudios.pushupplus.R;
 import com.resonatestudios.pushupplus.fragment.HistoryFragment;
 import com.resonatestudios.pushupplus.fragment.HomeFragment;
-import com.resonatestudios.pushupplus.fragment.LeaderboardFragment;
 import com.resonatestudios.pushupplus.fragment.NewsFragment;
 import com.resonatestudios.pushupplus.fragment.ProfileFragment;
 

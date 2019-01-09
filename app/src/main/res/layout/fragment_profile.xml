@@ -1,51 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".fragment.ProfileFragment">
 
-    <RelativeLayout
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_item_photo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        tools:src="@android:color/darker_gray" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/text_margin">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:src="@drawable/ic_person_black_24dp"
-            app:civ_border_width="2dp" />
+        android:layout_toEndOf="@id/img_item_photo"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/profile_name"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/profile_image"
-            android:text="Name"
-            tools:ignore="HardcodedText" />
+            android:layout_marginBottom="8dp"
+            android:text="Putri Nursofiyanti"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_edit"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/profile_image"
-            android:layout_toEndOf="@id/profile_image"
-            android:text="@string/edit" />
+            android:text="dd-mm-yyyy"
+            android:textSize="16sp" />
+    </LinearLayout>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_item_photo"
+        android:layout_marginTop="40dp"
+        android:background="@color/lightblue"
+        android:text="RECORDS"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-    <View
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/records"
+        android:layout_marginTop="8dp"
+        android:stretchColumns="1">
 
-</LinearLayout>
+        <TableRow>
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="1."
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip"
+                android:text="Score"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="2."
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip"
+                android:text="Score"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="3."
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="3dip"
+                android:text="Score"
+                android:textSize="16sp" />
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>
