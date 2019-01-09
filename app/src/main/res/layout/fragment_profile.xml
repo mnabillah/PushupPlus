@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".fragment.ProfileFragment">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_item_photo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        tools:src="@android:color/darker_gray"/>
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_toEndOf="@id/img_item_photo"
+        android:layout_toRightOf="@id/img_item_photo"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Putri Nursofiyanti" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="dd-mm-yyyy" />
+    </LinearLayout>
+
     <TextView
+        android:id="@+id/records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RECORDS"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/img_item_photo"
+        android:background="@color/lightblue"/>
+
+    <TableLayout
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/records"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:stretchColumns="1">
 
-</FrameLayout>
+        <TableRow>
+            <TextView
+                android:gravity="left"
+                android:textSize="16sp"
+                android:padding="3dip"
+                android:text="1." />
+            <TextView
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp"
+                android:gravity="left"
+                android:padding="3dip" />
+            <TextView
+                android:text="Score"
+                android:textSize="16sp"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:gravity="left"
+                android:textSize="16sp"
+                android:padding="3dip"
+                android:text="2." />
+            <TextView
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp"
+                android:gravity="left"
+                android:padding="3dip" />
+            <TextView
+                android:text="Score"
+                android:textSize="16sp"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:gravity="left"
+                android:padding="3dip"
+                android:textSize="16sp"
+                android:text="3." />
+            <TextView
+                android:text="dd-mm-yyyy"
+                android:textSize="16sp"
+                android:gravity="left"
+                android:padding="3dip" />
+            <TextView
+                android:text="Score"
+                android:textSize="16sp"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>
