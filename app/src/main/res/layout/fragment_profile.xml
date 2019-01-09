@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context=".fragment.ProfileFragment">
 
@@ -43,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/img_item_photo"
         android:layout_marginTop="40dp"
-        android:background="@color/lightblue"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/content_margin"
         android:text="RECORDS"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -80,19 +80,19 @@
         <TableRow>
 
             <TextView
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="3dip"
                 android:text="2."
                 android:textSize="16sp" />
 
             <TextView
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="3dip"
                 android:text="dd-mm-yyyy"
                 android:textSize="16sp" />
 
             <TextView
-                android:gravity="right"
+                android:gravity="end"
                 android:padding="3dip"
                 android:text="Score"
                 android:textSize="16sp" />
@@ -101,19 +101,19 @@
         <TableRow>
 
             <TextView
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="3dip"
                 android:text="3."
                 android:textSize="16sp" />
 
             <TextView
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="3dip"
                 android:text="dd-mm-yyyy"
                 android:textSize="16sp" />
 
             <TextView
-                android:gravity="right"
+                android:gravity="end"
                 android:padding="3dip"
                 android:text="Score"
                 android:textSize="16sp" />
