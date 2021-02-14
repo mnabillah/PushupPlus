@@ -1,106 +1,82 @@
-package com.resonatestudios.pushupplus.fragment;
+package com.resonatestudios.pushupplus.fragment
 
-
-import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.google.gson.GsonBuilder;
-import com.resonatestudios.pushupplus.Constants;
-import com.resonatestudios.pushupplus.R;
-import com.resonatestudios.pushupplus.adapter.NewsAdapter;
-import com.resonatestudios.pushupplus.controller.NewsApiController;
-import com.resonatestudios.pushupplus.model.NewsResponse;
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.GsonBuilder
+import com.resonatestudios.pushupplus.Constants
+import com.resonatestudios.pushupplus.R
+import com.resonatestudios.pushupplus.adapter.NewsAdapter
+import com.resonatestudios.pushupplus.controller.NewsApiController
+import com.resonatestudios.pushupplus.model.NewsResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple [Fragment] subclass.
  */
-public class NewsFragment extends Fragment {
-    private static final String TAG = "NewsFragment";
-    private RecyclerView recyclerViewNews;
-    private NewsApiController newsApiController;
-    private Context context;
-
-    public NewsFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+class NewsFragment : Fragment() {
+    private var recyclerViewNews: RecyclerView? = null
+    private val newsApiController: NewsApiController? = null
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
-        recyclerViewNews = view.findViewById(R.id.recycler_view_news);
-        return view;
+        val view = inflater.inflate(R.layout.fragment_news, container, false)
+        recyclerViewNews = view.findViewById(R.id.recycler_view_news)
+        return view
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        setNews();
+    override fun onStart() {
+        super.onStart()
+        setNews()
     }
 
-    private NewsApiController startApi() {
-        Retrofit retrofit = new Retrofit.Builder()
+    private fun startApi(): NewsApiController {
+        val retrofit = Retrofit.Builder()
                 .baseUrl(Constants.API_DOMAIN)
                 .addConverterFactory(GsonConverterFactory
-                        .create(new GsonBuilder()
+                        .create(GsonBuilder()
                                 .setLenient()
                                 .create()))
-                .build();
-
-        return retrofit.create(NewsApiController.class);
+                .build()
+        return retrofit.create(NewsApiController::class.java)
     }
 
-    private void setNews() {
-        final NewsAdapter newsAdapter = new NewsAdapter(context);
-        NewsApiController newsApiController = startApi();
-
-        Call<NewsResponse> newsResponseCall = newsApiController.getHeadlines("id", "health", Constants.API_KEY);
-        newsResponseCall.enqueue(new Callback<NewsResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
-                if (response.isSuccessful()) {
-                    NewsResponse newsResponse = response.body();
-                    if (newsResponse != null) {
-                        newsAdapter.setArticles(newsResponse.getArticles());
-                        recyclerViewNews.setLayoutManager(new LinearLayoutManager(context));
-                        recyclerViewNews.setAdapter(newsAdapter);
-                    }
+    private fun setNews() {
+        val newsAdapter = NewsAdapter(context!!)
+        val newsApiController = startApi()
+        val newsResponseCall = newsApiController.getHeadlines("id", "health", Constants.API_KEY)
+        newsResponseCall!!.enqueue(object : Callback<NewsResponse?> {
+            override fun onResponse(call: Call<NewsResponse?>, response: Response<NewsResponse?>) {
+                if (response.isSuccessful) {
+                    val newsResponse = response.body()
+                    newsAdapter.articles = newsResponse!!.articles!!
+                    recyclerViewNews!!.layoutManager = LinearLayoutManager(context)
+                    recyclerViewNews!!.adapter = newsAdapter
                 } else {
-                    Log.e(TAG, "API consume failure with response");
-                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "API consume failure with response")
+                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
-            @Override
-            public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
-                Log.e(TAG, "API consume failure with no response");
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            override fun onFailure(call: Call<NewsResponse?>, t: Throwable) {
+                Log.e(TAG, "API consume failure with no response")
+                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
             }
-        });
+        })
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
+    companion object {
+        private const val TAG = "NewsFragment"
     }
 }

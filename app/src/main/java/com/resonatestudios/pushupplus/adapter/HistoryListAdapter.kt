@@ -1,82 +1,56 @@
-package com.resonatestudios.pushupplus.adapter;
+package com.resonatestudios.pushupplus.adapter
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.resonatestudios.pushupplus.R
+import com.resonatestudios.pushupplus.model.HistoryItem
+import java.text.DateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-import com.resonatestudios.pushupplus.R;
-import com.resonatestudios.pushupplus.model.HistoryItem;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.Row> {
-    private ArrayList<HistoryItem> historyItems;
-    private Context context;
-
-    public HistoryListAdapter(Context context) {
-        this.context = context;
-        historyItems = new ArrayList<>();
+class HistoryListAdapter(private val context: Context) : RecyclerView.Adapter<HistoryListAdapter.Row>() {
+    var historyItems: ArrayList<HistoryItem> = ArrayList()
+    fun addToList(historyItem: HistoryItem) {
+        historyItems.add(historyItem)
     }
 
-    public ArrayList<HistoryItem> getHistoryItems() {
-        return historyItems;
-    }
-
-    public void setHistoryItems(ArrayList<HistoryItem> historyItems) {
-        this.historyItems = historyItems;
-    }
-
-    public void addToList(HistoryItem historyItem) {
-        historyItems.add(historyItem);
-    }
-
-    @NonNull
-    @Override
-    public Row onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_list, parent, false);
-        return new Row(view);
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Row {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_history_list, parent, false)
+        return Row(view)
     }
 
     @SuppressLint("DefaultLocale")
-    @Override
-    public void onBindViewHolder(@NonNull Row holder, int position) {
-        HistoryItem historyItem = historyItems.get(position);
-
-        holder.textViewNumber.setText(String.valueOf(position + 1));
-        holder.textViewAmount.setText(String.valueOf(historyItem.getAmount()));
-        long totalMilliseconds = historyItem.getDuration();
-        int seconds = (int) (totalMilliseconds / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
-        int milliSeconds = (int) (totalMilliseconds % 1000);
-        holder.textViewDuration.setText(String.format("%02d:%02d:%03d", minutes, seconds, milliSeconds));
-        holder.textViewDate.setText(DateFormat.getDateInstance().format(historyItem.getDate()));
+    override fun onBindViewHolder(holder: Row, position: Int) {
+        val historyItem = historyItems[position]
+        holder.textViewNumber.text = (position + 1).toString()
+        holder.textViewAmount.text = historyItem.amount.toString()
+        val totalMilliseconds = historyItem.duration
+        var seconds = (totalMilliseconds / 1000).toInt()
+        val minutes = seconds / 60
+        seconds %= 60
+        val milliSeconds = (totalMilliseconds % 1000).toInt()
+        holder.textViewDuration.text = String.format("%02d:%02d:%03d", minutes, seconds, milliSeconds)
+        holder.textViewDate.text = DateFormat.getDateInstance().format(historyItem.date)
     }
 
-    @Override
-    public int getItemCount() {
-        return historyItems.size();
+    override fun getItemCount(): Int {
+        return historyItems.size
     }
 
-    class Row extends RecyclerView.ViewHolder {
-        TextView textViewNumber;
-        TextView textViewAmount;
-        TextView textViewDuration;
-        TextView textViewDate;
+    inner class Row(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var textViewNumber: TextView = itemView.findViewById(R.id.text_view_number)
+        var textViewAmount: TextView = itemView.findViewById(R.id.text_view_amount)
+        var textViewDuration: TextView = itemView.findViewById(R.id.text_view_duration)
+        var textViewDate: TextView = itemView.findViewById(R.id.text_view_date)
 
-        Row(@NonNull View itemView) {
-            super(itemView);
-            textViewNumber = itemView.findViewById(R.id.text_view_number);
-            textViewAmount = itemView.findViewById(R.id.text_view_amount);
-            textViewDuration = itemView.findViewById(R.id.text_view_duration);
-            textViewDate = itemView.findViewById(R.id.text_view_date);
-        }
+    }
+
+    init {
+        historyItems = ArrayList()
     }
 }

@@ -1,14 +1,13 @@
-package com.resonatestudios.pushupplus.controller;
+package com.resonatestudios.pushupplus.controller
 
-import com.resonatestudios.pushupplus.model.NewsResponse;
+import com.resonatestudios.pushupplus.model.NewsResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
-public interface NewsApiController {
+interface NewsApiController {
     @GET("top-headlines")
-    Call<NewsResponse> getHeadlines(@Query("country") String country,
-                                    @Query("category") String category,
-                                    @Query("apiKey") String apiKey);
+    fun getHeadlines(@Query("country") country: String?,
+                     @Query("category") category: String?,
+                     @Query("apiKey") apiKey: String?): Call<NewsResponse?>?
 }

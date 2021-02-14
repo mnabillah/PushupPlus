@@ -1,59 +1,22 @@
-package com.resonatestudios.pushupplus.model;
+package com.resonatestudios.pushupplus.model
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
-public class Article {
+class Article {
     @SerializedName("source")
-    private Article.Source source;
+    var source: Source? = null
+
     @SerializedName("title")
-    private String title;
+    var title: String? = null
+
     @SerializedName("url")
-    private String url;
+    var url: String? = null
+
     @SerializedName("urlToImage")
-    private String urlToImage;
+    var urlToImage: String? = null
 
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public class Source {
+    inner class Source {
         @SerializedName("name")
-        String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+        var name: String? = null
     }
 }

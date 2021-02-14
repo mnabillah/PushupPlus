@@ -1,42 +1,21 @@
-package com.resonatestudios.pushupplus.fragment;
+package com.resonatestudios.pushupplus.fragment
 
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.resonatestudios.pushupplus.R;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.resonatestudios.pushupplus.R
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple [Fragment] subclass.
  */
-public class ProfileFragment extends Fragment {
-
-    private Button.OnClickListener onClickListener = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Snackbar.make(v, "Still under development", Snackbar.LENGTH_SHORT).show();
-        }
-    };
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+class ProfileFragment : Fragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        Button buttonEdit = view.findViewById(R.id.button_edit);
-        buttonEdit.setOnClickListener(onClickListener);
-
-        return view;
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        return view
     }
-
 }
